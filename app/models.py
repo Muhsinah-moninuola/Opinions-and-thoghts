@@ -1,5 +1,14 @@
 from django.db import models
 from django.utils.text import slugify
+from django.contrib.auth.models import AbstractUser
+
+
+class User(AbstractUser):
+    phone_number = models.CharField(max_length=15)
+    age = models.CharField(max_length=5)
+    gender = models.CharField(max_length=7)
+    country = models.CharField(max_length=50)
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -19,9 +28,10 @@ class Post(models.Model):
         ('Draft', 'Draft'),
         ('Publish', 'Publish')
     )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=1000)
     content = models.TextField()
-    image = models.ImageField(upload_to="simage/")
+    image = models.ImageField(upload_to="simage/", null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_TYPE)
     approval = models.BooleanField(default=False)
@@ -43,3 +53,10 @@ class Comment(models.Model):
     name = models.CharField(max_length=50)
     created_at =models.DateTimeField(auto_now_add=True)
 # Create your models here.
+
+
+class Newsletter(models.Model):
+    email = models.CharField(max_length=100)
+    name = models.CharField(max_length=50)
+    created_at =models.DateTimeField(auto_now_add=True)
+
