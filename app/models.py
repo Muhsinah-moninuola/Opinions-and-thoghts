@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import AbstractUser
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class User(AbstractUser):
@@ -8,6 +9,13 @@ class User(AbstractUser):
     age = models.CharField(max_length=5)
     gender = models.CharField(max_length=7)
     country = models.CharField(max_length=50)
+
+    def tokens(self):
+        refresh = RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access':str(refresh.access_token)
+            }
 
 
 class Category(models.Model):
