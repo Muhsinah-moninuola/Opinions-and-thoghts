@@ -22,7 +22,8 @@ from rest_framework_simplejwt.views import TokenObtainPairView,TokenRefreshView
 from rest_framework_simplejwt.views import TokenVerifyView
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view as swagger_get_schema_view
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 schema_view = swagger_get_schema_view(
     openapi.Info(
@@ -54,5 +55,5 @@ urlpatterns = [
     path('', schema_view.with_ui('swagger', cache_timeout=0), name="schema-swagger-ui"),
     path('api/blogapp/userposts/<str:user_username>/',UserpostsApiView.as_view()),
 
- ]
+ ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += router.urls
