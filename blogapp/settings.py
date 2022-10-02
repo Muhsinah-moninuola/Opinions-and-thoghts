@@ -28,7 +28,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["lionfish-app-jddze.ondigitalocean.app", "https://lionfish-app-jddze.ondigitalocean.app/", "127.0.0.1:8000"]
+ALLOWED_HOSTS = ["dolphin-app-7fymy.ondigitalocean.app", "https://dolphin-app-7fymy.ondigitalocean.app/", "127.0.0.1:8000"]
 
 
 # Application definition
